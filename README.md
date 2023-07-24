@@ -8,7 +8,7 @@ The project was created in Java using the Gradle build system. An additional lib
 
 ## Tests
 The app has been tested on [Redmi Note 5 64GB](https://www.mi.com/in/redmi-note5/specs/). The minimum version of Android is [9 (Pie)](https://apilevels.com).
-The test video is available at the [link]().
+The test video is available at the [link](https://drive.google.com/file/d/136CaHtV4n_6-oGHTG_wWHiKGCDDqSNvT/view?usp=sharing).
 
 
 ## Credits

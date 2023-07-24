@@ -48,4 +48,7 @@ dependencies {
     implementation "androidx.camera:camera-view:${camerax_version}"
     // If you want to additionally use the CameraX Extensions library
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    // OpenCV library
+    implementation 'com.quickbirdstudios:opencv:4.5.1'
 }

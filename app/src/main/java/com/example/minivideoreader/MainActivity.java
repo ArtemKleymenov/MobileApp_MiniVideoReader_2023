@@ -37,6 +37,9 @@ import java.util.concurrent.ExecutionException;
 import android.os.SystemClock;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CAMERA = 83854;  // Random number
@@ -51,10 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
     YUVtoRGB translator = new YUVtoRGB();
 
+    BestFrameSelector selector = new BestFrameSelector();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OpenCVLoader.initDebug();
 
         File pictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         // TODO:
@@ -153,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         Thread thread = new Thread(() -> {
             // TODO:
             // THRESHOLD SHOULD BE CHANGED
-            if(CREATED_METHOD(localBitmap) > 90.0) {
+            if(CREATED_METHOD(localBitmap)) {
                 try {
                     FileOutputStream fos = new FileOutputStream(picFile);
                     localBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
@@ -173,11 +180,8 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO:
     // Add own method
-    public double CREATED_METHOD(Bitmap img) {
-        SystemClock.sleep(1000);
-        Random r = new Random();
-        double v = r.nextGaussian() * 50.0 + 50.0;
-        return v;
+    public Boolean CREATED_METHOD(Bitmap img) {
+        return selector.process(img);
     }
 
     public void AfterProcessFinished() {
